@@ -9,7 +9,7 @@ connectDB();
 const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://role-based-authenictaion.onrender.com'
+  'https://role-based-authenictaions.onrender.com'
 ];
 
 app.use(cors({
