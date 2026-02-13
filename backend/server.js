@@ -9,7 +9,7 @@ connectDB();
 const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://newnode-pxjc.onrender.com'
+  'https://role-based-authenictaion.onrender.com'
 ];
 
 app.use(cors({
