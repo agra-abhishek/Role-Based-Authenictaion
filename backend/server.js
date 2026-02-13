@@ -7,14 +7,28 @@ dotenv.config();
 connectDB();
 
 const app = express();
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://newnode-pxjc.onrender.com'
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow Postman / non-browser requests
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed'));
+    }
+  },
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 
-app.use(cors());
+// Body parsing & cookies
 app.use(express.json());
-
+app.use(cookieParser());
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/user", require("./routes/user.routes"));
 
